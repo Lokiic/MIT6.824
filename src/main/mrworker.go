@@ -10,21 +10,26 @@ package main
 // Please do not change this file.
 //
 
-import "../mr"
-import "plugin"
-import "os"
-import "fmt"
-import "log"
+import (
+	"log"
+	"os"
+	"plugin"
 
+	"../mr"
+)
+
+// 通过命令行参数传入动态插件库
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "Usage: mrworker xxx.so\n")
-		os.Exit(1)
-	}
+	// if len(os.Args) != 2 {
+	// 	fmt.Fprintf(os.Stderr, "Usage: mrworker xxx.so\n")
+	// 	os.Exit(1)
+	// }
 
 	mapf, reducef := loadPlugin(os.Args[1])
+	// workerId := os.Args[2] // 输入的时候，可以给每个worker编号
+	// id, _ := strconv.Atoi(workerId)
 
-	mr.Worker(mapf, reducef)
+	mr.Worker(mapf, reducef, 1)
 }
 
 //

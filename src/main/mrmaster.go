@@ -9,10 +9,13 @@ package main
 // Please do not change this file.
 //
 
-import "../mr"
-import "time"
-import "os"
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"time"
+
+	"../mr"
+)
 
 func main() {
 	if len(os.Args) < 2 {
@@ -20,6 +23,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	// 通过命令行参数传入输入文件，指定nReduce = 10，即分配10个reduce任务
 	m := mr.MakeMaster(os.Args[1:], 10)
 	for m.Done() == false {
 		time.Sleep(time.Second)
